@@ -1,11 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pembayaran Transaksi Pespat | PayKuy!</title>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
   </head>
+
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <header>
+      <nav class="bg-sky-500 drop-shadow-lg">
+        <div class="container w-full md:max-w-xl mx-auto p-5">
+          <a
+            href="#"
+            class="inline-block text-xl text-white font-bold focus-visible:outline-none"
+            >Pespat</a
+          >
+          <a
+            href="#"
+            class="inline-block text-white float-right focus-visible:outline-none"
+            >Home</a
+          >
+        </div>
+      </nav>
+    </header>
+    <div class="hidden bg-orange-100 text-center w-full p-3">
+      <h3 class="text-orange-700 font-semibold">
+        Bayar Sebelum 12 Oktober 2022 Pukul 23.59
+      </h3>
+    </div>
+
+    <%- include('main') %>
+
+    
+
+    <footer class="py-10 text-center italic">Powered by PayKuy!</footer>
   </body>
 </html>
