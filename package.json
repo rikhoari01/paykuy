@@ -11,6 +11,19 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "mongoose": "^6.3.4",
     "morgan": "~1.9.1"
-  }
+  },
+  "description": "Paykuy! adalah sebuah platform khusus untuk melakukan sistem pembayaran yang terintegrasi dengan berbagai jenis metode pembayaran.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rikhoari01/paykuy.git"
+  },
+  "author": "BAIG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rikhoari01/paykuy/issues"
+  },
+  "homepage": "https://github.com/rikhoari01/paykuy#readme"
 }
