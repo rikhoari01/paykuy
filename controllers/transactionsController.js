@@ -41,7 +41,7 @@ module.exports = {
         res.render("success");
       }
     } catch (error) {
-      res.redirect("/error");
+      res.render("error");
     }
   },
 
