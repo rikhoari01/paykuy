@@ -20,11 +20,7 @@
     "type": "git",
     "url": "git+https://github.com/rikhoari01/paykuy.git"
   },
-<<<<<<< HEAD
   "author": "BAIG",
-=======
-  "author": "",
->>>>>>> 15ee67f5a091adfe6c4e4d0180bfced6524cba99
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rikhoari01/paykuy/issues"

@@ -6,11 +6,7 @@ var logger = require('morgan');
 
 const mongoose = require("mongoose");
 
-<<<<<<< HEAD
 mongoose.connect(process.env.DB_URL || "mongodb+srv://rikhoari02:mqA3ZRSYO3O6TPhM@cluster0.tvl2odk.mongodb.net/?retryWrites=true&w=majority", {
-=======
-mongoose.connect("mongodb+srv://rikhoari02:mqA3ZRSYO3O6TPhM@cluster0.tvl2odk.mongodb.net/?retryWrites=true&w=majority", {
->>>>>>> 15ee67f5a091adfe6c4e4d0180bfced6524cba99
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
