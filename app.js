@@ -3,14 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var method = require('method-override')
 
 const mongoose = require("mongoose");
 
-<<<<<<< HEAD
 mongoose.connect(process.env.DB_URL || "mongodb+srv://rikhoari02:mqA3ZRSYO3O6TPhM@cluster0.tvl2odk.mongodb.net/?retryWrites=true&w=majority", {
-=======
-mongoose.connect("mongodb+srv://rikhoari02:mqA3ZRSYO3O6TPhM@cluster0.tvl2odk.mongodb.net/?retryWrites=true&w=majority", {
->>>>>>> 15ee67f5a091adfe6c4e4d0180bfced6524cba99
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -28,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(method('_method'))
 
 app.use('/', indexRouter);
 

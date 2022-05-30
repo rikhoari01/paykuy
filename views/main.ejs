@@ -14,22 +14,14 @@
   </div>
 
   <div class="my-10 text-center">
-<<<<<<< HEAD
     <h3 class="text-sm">
       Bayar Sebelum <%= fullDate.day %> <%= fullDate.month %> <%= fullDate.year
-      %> Pukul <%= fullDate.hours %>.<%= fullDate.minutes %>
+      %> Pukul <%= fullDate.hours %>.<% if(fullDate.minutes < 10){ %>0<% } %><%= fullDate.minutes %>
     </h3>
     <h1
       class="mt-3 text-sky-400 text-5xl font-bold drop-shadow-md tracking-wider"
     >
       Rp <%= transaction.totalPrice %>
-=======
-    <h3 class="text-sm">Bayar Sebelum <%= fullDate.day %> <%= fullDate.month %> <%= fullDate.year %> Pukul <%= fullDate.hours %>.<%= fullDate.minutes %></h3>
-    <h1
-      class="mt-3 text-sky-400 text-5xl font-bold drop-shadow-md tracking-wider"
-    >
-    Rp <%= transaction.totalPrice %>
->>>>>>> 15ee67f5a091adfe6c4e4d0180bfced6524cba99
     </h1>
   </div>
 
