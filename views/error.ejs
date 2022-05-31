@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/stylesheets/error.css" />
   </head>
   <body>
-    <% if(error.status || error.stack){ %>
+    <% if(error.status){ %>
     <h1><%= message %></h1>
     <h2><%= error.status %></h2>
     <pre><%= error.stack %></pre>
