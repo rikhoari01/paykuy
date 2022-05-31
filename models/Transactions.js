@@ -12,6 +12,16 @@ const transactionsScheme = new mongoose.Schema({
     status: {
         type: Boolean,  
         default: 0,
+    },
+    paymentMethod: {
+        type: String
+    },
+    imageUrl: {
+        type: String
+    },
+    foreignId: {
+        type: String,
+        required: true,
     }
 });
 
