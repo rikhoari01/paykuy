@@ -48,6 +48,17 @@ module.exports = {
     }
   },
 
+  getTransaction: async (req, res) => {
+    const foreignId = req.params.id;
+    await Transaction.findOne({ foreignId })
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((error) => {
+      res.status(500).json({ success: false, msg: `Something went wrong. ${error}` })
+    })
+  },
+
   addTransaction: async (req, res) => {
     let newTransaction = new Transaction({
       totalPrice: req.body.totalPrice,

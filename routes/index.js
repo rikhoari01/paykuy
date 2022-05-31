@@ -15,6 +15,7 @@ const diskStorage = multer.diskStorage({
 const Transcontroller = require("../controllers/transactionsController");
 
 router.get("/bayar/:id", Transcontroller.viewTransaction);
+router.get("/transaction/:id", Transcontroller.getTransaction);
 router.post("/transaction/add", Transcontroller.addTransaction);
 router.put("/transaction/:id/payment/edit", Transcontroller.editPayment);
 router.put("/transaction/:id/status/edit", Transcontroller.editStatus);
