@@ -7,9 +7,13 @@ var method = require('method-override')
 
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.DB_URL || "mongodb+srv://rikhoari02:mqA3ZRSYO3O6TPhM@cluster0.tvl2odk.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect(process.env.DB_URL || "mongodb://localhost:27017/paykuy_db", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+}).then(() => {
+  console.log("Connected to Database");
+}).catch((err) => {
+  console.log(err);
 })
 
 var indexRouter = require('./routes/index');

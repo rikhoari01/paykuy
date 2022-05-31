@@ -5,7 +5,7 @@ let date = new Date();
 module.exports = {
   viewTransaction: async (req, res) => {
     const id = req.params.id;
-
+    console.log(id)
     try {
       const transaction = await Transaction.findById(id);
 
@@ -44,7 +44,7 @@ module.exports = {
         res.render("success");
       }
     } catch (error) {
-      res.redirect("/error");
+      res.render("error");
     }
   },
 
