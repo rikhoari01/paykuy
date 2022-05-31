@@ -16,7 +16,7 @@ const transactionsScheme = new mongoose.Schema({
     paymentMethod: {
         type: String
     },
-    imageUrl: {
+    receiptUrl: {
         type: String
     },
     foreignId: {

@@ -25,14 +25,14 @@
           </svg>
         </button>
       </div>
-      <form action="/transaction/<%= id %>/image/edit?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="p-6">
-          <input type="text" id="id" value="<%= id %>" hidden>
+          <input type="text" id="id" name="id" value="<%= id %>" hidden>
+          <input type="text" id="paymentMethod" name="paymentMethod" value="" hidden>
           <input
             class="form-control block w-full p-2 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             type="file"
-            id="recipe-input"
-            name="recipe"
+            id="receipt-input"
+            name="receipt"
           />
           <p id="confirm-text">Apakah anda sudah melakukan transfer sesuai petunjuk?</p>
         </div>
@@ -52,7 +52,6 @@
             Upload
           </button>
         </div>
-      </form>
     </div>
   </div>
 </div>

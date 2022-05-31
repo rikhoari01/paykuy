@@ -35,7 +35,7 @@ module.exports = {
         res.render("index", {
           fullDate,
           transaction,
-          id
+          id,
         });
       } else if (transaction.expDate < date && transaction.status == false) {
         res.render("expired");
@@ -44,19 +44,21 @@ module.exports = {
       }
     } catch (error) {
       res.render("error");
-      console.log(error)
+      console.log(error);
     }
   },
 
   getTransaction: async (req, res) => {
     const foreignId = req.params.id;
     await Transaction.findOne({ foreignId })
-    .then((result) => {
-      res.json(result)
-    })
-    .catch((error) => {
-      res.status(500).json({ success: false, msg: `Something went wrong. ${error}` })
-    })
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res
+          .status(500)
+          .json({ success: false, msg: `Something went wrong. ${error}` });
+      });
   },
 
   addTransaction: async (req, res) => {
@@ -78,7 +80,7 @@ module.exports = {
             expDate: result.expDate,
             status: result.status,
             paymentMethod: result.paymentMethod,
-            imageUrl: result.imageUrl,
+            receiptUrl: result.receiptUrl,
             foreignId: result.foreignId,
           },
         });
@@ -90,11 +92,13 @@ module.exports = {
       });
   },
 
-  editPayment: async (req, res) => {
+  editTransaction: async (req, res) => {
     Transaction.findOneAndUpdate(
       { _id: req.params.id },
       {
         paymentMethod: req.body.paymentMethod,
+        status: 1,
+        receiptUrl: req.body.receipt,
       }
     )
       .then((oldResult) => {
@@ -107,35 +111,9 @@ module.exports = {
               totalPrice: newResult.totalPrice,
               expDate: newResult.expDate,
               status: newResult.status,
-              paymentMethod: result.paymentMethod,
-              imageUrl: result.imageUrl,
-              foreignId: result.foreignId,
-            },
-          });
-        });
-      })
-      .catch((error) => {
-        res
-          .status(500)
-          .json({ success: false, msg: `Something went wrong. ${error}` });
-      });
-  },
-
-  editStatus: async (req, res) => {
-    Transaction.findOneAndUpdate({ _id: req.params.id }, { status: 1 })
-      .then((oldResult) => {
-        Transaction.findOne({ _id: req.params.id }).then((newResult) => {
-          res.json({
-            success: true,
-            msg: "Successfully updated!",
-            result: {
-              _id: newResult._id,
-              totalPrice: newResult.totalPrice,
-              expDate: newResult.expDate,
-              status: newResult.status,
-              paymentMethod: result.paymentMethod,
-              imageUrl: result.imageUrl,
-              foreignId: result.foreignId,
+              paymentMethod: newResult.paymentMethod,
+              receiptUrl: newResult.receiptUrl,
+              foreignId: newResult.foreignId,
             },
           });
         });
@@ -150,7 +128,7 @@ module.exports = {
   editImage: async (req, res) => {
     Transaction.findOneAndUpdate(
       { _id: req.params.id },
-      { imageUrl: req.file.path }
+      { receiptUrl: req.body.receipt }
     )
       .then((oldResult) => {
         Transaction.findOne({ _id: req.params.id }).then((newResult) => {
@@ -163,18 +141,18 @@ module.exports = {
               expDate: newResult.expDate,
               status: newResult.status,
               paymentMethod: result.paymentMethod,
-              imageUrl: result.imageUrl,
+              receiptUrl: result.receiptUrl,
               foreignId: result.foreignId,
             },
           });
         });
-        res.redirect('/bayar/' + req.params.id);
+        res.redirect("/bayar/" + req.params.id);
       })
       .catch((error) => {
         res
           .status(500)
           .json({ success: false, msg: `Something went wrong. ${error}` });
-          res.redirect('/bayar/' + req.params.id);
+        res.redirect("/bayar/" + req.params.id);
       });
   },
 };

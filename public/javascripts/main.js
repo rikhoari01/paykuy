@@ -44,6 +44,9 @@ $("#bri-manual").click(() => {
   $("#final-btn").text("Upload Bukti Transfer");
   $("#final-btn").addClass("upload-btn");
   $("#final-btn").removeClass("confirm-btn");
+
+  $("#paymentMethod").val("BRI-Manual");
+  $("#abc").val("BRI-Manual");
 });
 
 $("#bni-manual").click(() => {
@@ -92,6 +95,8 @@ $("#bni-manual").click(() => {
   $("#final-btn").text("Upload Bukti Transfer");
   $("#final-btn").addClass("upload-btn");
   $("#final-btn").removeClass("confirm-btn");
+
+  $("#paymentMethod").val("BNI-Manual");
 });
 
 $("#mandiri-manual").click(() => {
@@ -140,6 +145,8 @@ $("#mandiri-manual").click(() => {
   $("#final-btn").text("Upload Bukti Transfer");
   $("#final-btn").addClass("upload-btn");
   $("#final-btn").removeClass("confirm-btn");
+
+  $("#paymentMethod").val("Mandiri-Manual");
 });
 
 $("#bca-manual").click(() => {
@@ -188,6 +195,8 @@ $("#bca-manual").click(() => {
   $("#final-btn").text("Upload Bukti Transfer");
   $("#final-btn").addClass("upload-btn");
   $("#final-btn").removeClass("confirm-btn");
+
+  $("#paymentMethod").val("BCA-Manual");
 });
 
 $("#other-manual").click(() => {
@@ -236,6 +245,8 @@ $("#other-manual").click(() => {
   $("#final-btn").text("Upload Bukti Transfer");
   $("#final-btn").addClass("upload-btn");
   $("#final-btn").removeClass("confirm-btn");
+
+  $("#paymentMethod").val("Other-Manual");
 });
 
 $("#bri-virtual").click(() => {
@@ -284,6 +295,8 @@ $("#bri-virtual").click(() => {
   $("#final-btn").text("Konfirmasi");
   $("#final-btn").addClass("confirm-btn");
   $("#final-btn").removeClass("upload-btn");
+
+  $("#paymentMethod").val("BRIVA");
 });
 
 $("#bni-virtual").click(() => {
@@ -332,6 +345,8 @@ $("#bni-virtual").click(() => {
   $("#final-btn").text("Konfirmasi");
   $("#final-btn").addClass("confirm-btn");
   $("#final-btn").removeClass("upload-btn");
+
+  $("#paymentMethod").val("BNI-Virtual");
 });
 
 $("#mandiri-virtual").click(() => {
@@ -380,6 +395,8 @@ $("#mandiri-virtual").click(() => {
   $("#final-btn").text("Konfirmasi");
   $("#final-btn").addClass("confirm-btn");
   $("#final-btn").removeClass("upload-btn");
+
+  $("#paymentMethod").val("Mandiri-Virtual");
 });
 
 $("#bca-virtual").click(() => {
@@ -428,6 +445,8 @@ $("#bca-virtual").click(() => {
   $("#final-btn").text("Konfirmasi");
   $("#final-btn").addClass("confirm-btn");
   $("#final-btn").removeClass("upload-btn");
+
+  $("#paymentMethod").val("BCA-Virtual");
 });
 
 // Back Button
@@ -444,11 +463,12 @@ $("#final-btn").click(() => {
   if ($("#final-btn").hasClass("upload-btn")) {
     $("#modal-title").text("Upload Bukti Transfer");
     $("#confirm-text").addClass("hidden");
-    $("#recipe-input").removeClass("hidden");
+    $("#receipt-input").removeClass("hidden");
   } else if ($("#final-btn").hasClass("confirm-btn")) {
     $("#modal-title").text("Konfirmasi Transfer");
+    $("#submit").text("Konfirmasi");
     $("#confirm-text").removeClass("hidden");
-    $("#recipe-input").addClass("hidden");
+    $("#receipt-input").addClass("hidden");
   }
 });
 
@@ -463,5 +483,51 @@ $("#cancel").click(() => {
 $(window).click((e) => {
   if (e.target == document.getElementById("upload-modal")) {
     $("#modal").addClass("hidden");
+  }
+});
+
+// Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCQUeihADWZR1Eh8Z0dttt0EKto7eNv-4E",
+  authDomain: "paykuy-54aad.firebaseapp.com",
+  projectId: "paykuy-54aad",
+  storageBucket: "paykuy-54aad.appspot.com",
+  messagingSenderId: "492569773274",
+  appId: "1:492569773274:web:81ff6e1c05342ca6f2d1e3",
+  measurementId: "G-PTSC51T7EE",
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Upload Receipt
+$("#submit").click(() => {
+  if ($("#receipt-input").val()) {
+    const ref = firebase.storage().ref();
+    const file = document.querySelector("#receipt-input").files[0];
+    const name = "receipt-" + +new Date();
+    const metadata = { contentType: file.type };
+
+    const id = $("#id").val();
+    const payment = $("#paymentMethod").val();
+
+    const upload = ref.child(name).put(file, metadata);
+    upload
+      .then((snapshot) => snapshot.ref.getDownloadURL())
+      .then((url) => {
+        $.ajax({
+          url: "/transaction/"+id+"/edit",
+          method: 'PUT',
+          dataType: 'json',
+          data: {
+            paymentMethod: payment,
+            receipt: url,
+          },
+          succes: () => {
+            const newUrl = weburl+"/bayar/"+id;
+            window.location.replace(newUrl);
+          }
+        })
+      });
   }
 });
