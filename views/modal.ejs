@@ -5,8 +5,7 @@
   <div class="relative px-4 pt-24 w-full max-w-xl mx-auto">
     <div class="relative bg-white rounded-lg shadow">
       <div class="flex justify-between items-start p-4 rounded-t border-b">
-        <h3 id="modal-title" class="text-xl font-semibold text-gray-900">
-        </h3>
+        <h3 id="modal-title" class="text-xl font-semibold text-gray-900"></h3>
         <button
           type="button"
           class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center upload-modal-close"
@@ -25,33 +24,48 @@
           </svg>
         </button>
       </div>
-        <div class="p-6">
-          <input type="text" id="id" name="id" value="<%= id %>" hidden>
-          <input type="text" id="paymentMethod" name="paymentMethod" value="" hidden>
-          <input
-            class="form-control block w-full p-2 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            type="file"
-            id="receipt-input"
-            name="receipt"
-          />
-          <p id="confirm-text">Apakah anda sudah melakukan transfer sesuai petunjuk?</p>
-        </div>
-        <div
-          class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200"
+      <div class="p-6">
+        <input type="text" id="id" name="id" value="<%= id %>" hidden />
+        <input
+          type="text"
+          id="paymentMethod"
+          name="paymentMethod"
+          value=""
+          hidden
+        />
+        <input
+          class="form-control block w-full p-2 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          type="file"
+          id="receipt-input"
+          name="receipt"
+        />
+        <p id="confirm-text">
+          Apakah anda sudah melakukan transfer sesuai petunjuk?
+        </p>
+      </div>
+      <div
+        class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200"
+      >
+        <button
+          id="cancel"
+          type="button"
+          class="text-white bg-blue-400 w-full hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
         >
-          <button id="cancel"
-            type="button"
-            class="text-white bg-blue-400 w-full hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            Batal
-          </button>
-          <button id="submit"
-            type="submit"
-            class="text-white bg-orange-400 w-full hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            Upload
-          </button>
+          Batal
+        </button>
+        <div
+          id="submit"
+          class="cursor-pointer text-white bg-orange-400 w-full hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        >
+        <div id="submit-text">Upload</div>
+          <div id="submit-animation" class="hidden">
+            <div
+              style="border-top-color: transparent"
+              class="mx-auto w-5 h-5 border-4 border-white border-solid rounded-full animate-spin"
+            ></div>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </div>

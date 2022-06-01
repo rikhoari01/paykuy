@@ -466,7 +466,7 @@ $("#final-btn").click(() => {
     $("#receipt-input").removeClass("hidden");
   } else if ($("#final-btn").hasClass("confirm-btn")) {
     $("#modal-title").text("Konfirmasi Transfer");
-    $("#submit").text("Konfirmasi");
+    $("#submit-text").text("Konfirmasi");
     $("#confirm-text").removeClass("hidden");
     $("#receipt-input").addClass("hidden");
   }
@@ -501,8 +501,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Upload Receipt
-$("#submit").click(() => {
+$("#submit").click(async () => {
   if ($("#receipt-input").val()) {
+    $("#submit-text").addClass("hidden");
+    $("#submit-animation").removeClass("hidden");
+
     const ref = firebase.storage().ref();
     const file = document.querySelector("#receipt-input").files[0];
     const name = "receipt-" + +new Date();
@@ -512,22 +515,22 @@ $("#submit").click(() => {
     const payment = $("#paymentMethod").val();
 
     const upload = ref.child(name).put(file, metadata);
-    upload
+    await upload
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => {
         $.ajax({
-          url: "/transaction/"+id+"/edit",
-          method: 'PUT',
-          dataType: 'json',
+          url: "/transaction/" + id + "/edit",
+          method: "PUT",
+          dataType: "json",
           data: {
             paymentMethod: payment,
             receipt: url,
           },
-          succes: () => {
-            const newUrl = weburl+"/bayar/"+id;
-            window.location.replace(newUrl);
-          }
-        })
+          error: () => {
+            alert("Something error!");
+          },
+        });
       });
+    setInterval("location.reload()", 5000);
   }
 });
