@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const transactionsScheme = new mongoose.Schema({
     totalPrice: {
-        type: Number,
+        type: String,
         required: true,
     },
     expDate: {

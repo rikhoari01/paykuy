@@ -7,7 +7,7 @@ module.exports = {
     const id = req.params.id;
     try {
       const transaction = await Transaction.findById(id);
-      const price = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumSignificantDigits: 6 }).format(transaction.totalPrice)
+      const price = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumSignificantDigits: 6 }).format(parseInt(transaction.totalPrice))
       const monthNames = [
         "Januari",
         "Februari",
