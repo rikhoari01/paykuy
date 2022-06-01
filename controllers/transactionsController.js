@@ -7,7 +7,7 @@ module.exports = {
     const id = req.params.id;
     try {
       const transaction = await Transaction.findById(id);
-
+      const price = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumSignificantDigits: 6 }).format(transaction.totalPrice)
       const monthNames = [
         "Januari",
         "Februari",
@@ -34,8 +34,8 @@ module.exports = {
       if (transaction.expDate >= date && transaction.status == false) {
         res.render("index", {
           fullDate,
-          transaction,
           id,
+          price,
         });
       } else if (transaction.expDate < date && transaction.status == false) {
         res.render("expired");
@@ -50,7 +50,7 @@ module.exports = {
 
   getTransaction: async (req, res) => {
     const foreignId = req.params.id;
-    await Transaction.findOne({ foreignId })
+    await Transaction.find({ foreignId })
       .then((result) => {
         res.json(result);
       })
