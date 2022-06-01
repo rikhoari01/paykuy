@@ -33,7 +33,7 @@
     <div id="info" class="hidden bg-orange-100 text-center w-full p-3">
       <h3 class="text-orange-700 font-semibold">
         Bayar Sebelum <%= fullDate.day %> <%= fullDate.month %> <%= fullDate.year
-        %> Pukul <%= fullDate.hours %>.<% if(fullDate.minutes < 10){ %>0<% } %><%= fullDate.minutes %>
+        %> Pukul <% if(fullDate.minutes < 10){ %>0<% } %><%= fullDate.hours %>.<% if(fullDate.minutes < 10){ %>0<% } %><%= fullDate.minutes %>
       </h3>
     </div>
 
