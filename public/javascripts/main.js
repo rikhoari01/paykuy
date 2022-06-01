@@ -531,6 +531,6 @@ $("#submit").click(async () => {
           },
         });
       });
-    setInterval("location.reload()", 2000);
+    setInterval("location.reload()", 1000);
   }
 });
