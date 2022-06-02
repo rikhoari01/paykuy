@@ -1,3 +1,5 @@
+const fetch = require('node-fetch')
+
 const Transaction = require("../models/Transactions");
 
 let date = new Date();
@@ -93,12 +95,20 @@ module.exports = {
   },
 
   editTransaction: async (req, res) => {
+    const response = await fetch('https://iai.wisatasodonghilir.com/image', {
+      method: 'POST',
+      body: {
+        image: req.body.receipt
+      }
+    });
+    const data = await response.json();
+
     Transaction.findOneAndUpdate(
       { _id: req.params.id },
       {
         paymentMethod: req.body.paymentMethod,
         status: 1,
-        receiptUrl: req.body.receipt,
+        receiptUrl: data.url,
       }
     )
       .then((oldResult) => {
