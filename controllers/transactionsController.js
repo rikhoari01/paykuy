@@ -96,7 +96,7 @@ module.exports = {
 
   editTransaction: async (req, res) => {
     const response = await axios.post('https://iai.wisatasodonghilir.com/image', {image: req.body.receipt})
-	.then((result) => {
+	.then((data) => {
 	Transaction.findOneAndUpdate(
       { _id: req.params.id },
       {
