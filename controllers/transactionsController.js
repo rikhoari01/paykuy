@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const axios = require('axios')
 
 const Transaction = require("../models/Transactions");
 
@@ -95,15 +95,9 @@ module.exports = {
   },
 
   editTransaction: async (req, res) => {
-    const response = await fetch('https://iai.wisatasodonghilir.com/image', {
-      method: 'POST',
-      body: {
-        image: req.body.receipt
-      }
-    });
-    const data = await response.json();
-
-    Transaction.findOneAndUpdate(
+    const response = await axios.post('https://iai.wisatasodonghilir.com/image', {image: req.body.receipt})
+	.then((result) => {
+	Transaction.findOneAndUpdate(
       { _id: req.params.id },
       {
         paymentMethod: req.body.paymentMethod,
@@ -133,6 +127,8 @@ module.exports = {
           .status(500)
           .json({ success: false, msg: `Something went wrong. ${error}` });
       });
+	});
+
   },
 
   editImage: async (req, res) => {
